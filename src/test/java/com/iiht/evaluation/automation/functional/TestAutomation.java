@@ -26,16 +26,6 @@ public class TestAutomation extends App {
     private static WebDriver driver;
 	private static Actions actions;
 	
-	@BeforeAll
-	public static void preset() {
-		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--remote-allow-origins=*");
-		driver = new ChromeDriver(options);
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		String baseUrl = "http://practice.automationtesting.in/"; 
-		driver.get(baseUrl);
-	}
 	
 	public static String getHrefOfLink(WebElement w)
 	{
