@@ -6,8 +6,16 @@ import static com.iiht.evaluation.automation.testutils.TestUtils.currentTest;
 import static com.iiht.evaluation.automation.testutils.TestUtils.yakshaAssert;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+
 
 import com.iiht.evaluation.automation.Activities;
 import com.iiht.evaluation.automation.App;
@@ -15,11 +23,101 @@ import com.iiht.evaluation.automation.testutils.MasterData;
 
 public class TestAutomation extends App {
 
-   
+    private static WebDriver driver;
+	private static Actions actions;
+	
+	@BeforeAll
+	public static void preset() {
+		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(options);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		String baseUrl = "http://practice.automationtesting.in/"; 
+		driver.get(baseUrl);
+	}
+	
+	public static String getHrefOfLink(WebElement w)
+	{
+		
+		if (w.getAttribute("outerHTML").startsWith("<a")) {
+			return w.getAttribute("href");
+		}
+		else
+			return w.getAttribute("outerHTML");
+		
+	}
 
-   
+    @Test
+    public void test_click_on_shop_menu() throws IOException {
+        boolean testcase_status = true;
+        try {
+            boolean click_shop_menu_succeed = Activities.click_shop_menu(driver);
+            System.out.println("click_shop_menu_succeed " + click_shop_menu_succeed);
+            if (!click_shop_menu_succeed) {
+                testcase_status = false;
+            }
+            System.out.println("testcase_status " + testcase_status);
+            yakshaAssert(currentTest(), testcase_status, businessTestFile);
+        } catch (Exception ex) {
+            System.out.println("ex " + ex);
+           yakshaAssert(currentTest(), testcase_status, businessTestFile);
+        }
+    }
+    @Test
+    public void test_click_cart_icon() throws IOException {
+        boolean testcase_status = true;
+        try {
+            boolean click_cart_item_succeed = Activities.click_cart_icon(driver);
+           
+            if (!click_cart_item_succeed) {
+                testcase_status = false;
+            }
+            System.out.println("testcase_status " + testcase_status);
+            yakshaAssert(currentTest(), testcase_status, businessTestFile);
+        } catch (Exception ex) {
+            System.out.println("ex " + ex);
+           yakshaAssert(currentTest(), testcase_status, businessTestFile);
+        }
+    }
 
-   
+    @Test
+    public void test_add_current_product_count_in_excel() throws IOException {
+        boolean testcase_status = true;
+        try {
+            boolean add_current_product_count_in_excel = Activities.add_current_product_count_in_excel(driver);
+           
+            if (!add_current_product_count_in_excel) {
+                testcase_status = false;
+            }
+           // System.out.println("testcase_status " + testcase_status);
+            yakshaAssert(currentTest(), testcase_status, businessTestFile);
+        } catch (Exception ex) {
+            System.out.println("ex " + ex);
+           yakshaAssert(currentTest(), testcase_status, businessTestFile);
+        }
+    }
+
+
+
+    @Test
+    public void test_arrival_images_add_to_basket_clik_home_menu_button() throws IOException {
+        boolean testcase_status = true;
+        try {
+            boolean click_home_menu_button_succeed = Activities.click_home_menu_button(driver);
+            System.out.println("click_home_menu_button_succeed " + click_home_menu_button_succeed);
+            if (!click_home_menu_button_succeed) {
+                testcase_status = false;
+            }
+            System.out.println("testcase_status " + testcase_status);
+            yakshaAssert(currentTest(), testcase_status, businessTestFile);
+        } catch (Exception ex) {
+            System.out.println("ex " + ex);
+            yakshaAssert(currentTest(), testcase_status, businessTestFile);
+        }
+    }
+
+  
 
     @Test
     public void test_click_image_in_arrival() throws IOException {
