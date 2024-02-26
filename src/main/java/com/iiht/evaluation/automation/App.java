@@ -54,6 +54,10 @@ public class App{
         SubActivities.check_page_load_complete(driver);
     }
 
+    public static void main(String[] args) {
+        // call Activities method from here
+    }
+
     @AfterClass
     public static void teardown() {
         driver.quit();
