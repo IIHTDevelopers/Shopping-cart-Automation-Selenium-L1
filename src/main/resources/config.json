@@ -1,0 +1,7 @@
+{
+	"dev":{
+		"url":"http://practice.automationtesting.in/",
+		"pageloadtimeout":"90",
+		"implicitwaittime":"30"
+	}
+}
